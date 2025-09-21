@@ -38,7 +38,7 @@ export default function TermsOfUsePage() {
 
                 </div>
                 <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 text-balance">
-                    Política de Privacidad
+                    Terminos de uso
                 </h1>
                 <p className="text-lg text-gray-400 mb-2">
                     Última actualización: {new Date().toLocaleDateString("es-ES")}
