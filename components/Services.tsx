@@ -1,11 +1,16 @@
 "use client"
 
-import { motion, Variants, easeOut } from "framer-motion"
-import { useState, useEffect } from "react"
+import { motion, type Variants, easeOut } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 
 const Services = () => {
   const [activeService, setActiveService] = useState(0)
+  const [isHovering, setIsHovering] = useState(false)
+  const [isUserInteracting, setIsUserInteracting] = useState(false)
+  const [clickedService, setClickedService] = useState<number | null>(null)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   const services = [
     {
@@ -41,12 +46,65 @@ const Services = () => {
   ]
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveService((prev) => (prev + 1) % services.length)
-    }, 4000)
+    const startAutoCarousel = () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+      intervalRef.current = setInterval(() => {
+        if (!isUserInteracting && !isHovering) {
+          setActiveService((prev) => (prev + 1) % services.length)
+        }
+      }, 4000)
+    }
 
-    return () => clearInterval(interval)
-  }, [services.length])
+    startAutoCarousel()
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [services.length, isUserInteracting, isHovering])
+
+  const handleServiceClick = (index: number) => {
+    setActiveService(index)
+    setClickedService(index)
+    setIsUserInteracting(true)
+
+    // Clear existing timeout
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+
+    // Set new timeout for 5 seconds
+    timeoutRef.current = setTimeout(() => {
+      setIsUserInteracting(false)
+      setClickedService(null)
+    }, 5000)
+  }
+
+  const handleServiceHover = (index: number) => {
+    if (!isUserInteracting) {
+      setActiveService(index)
+    }
+  }
+
+  const handleServicesMouseEnter = () => {
+    setIsHovering(true)
+  }
+
+  const handleServicesMouseLeave = () => {
+    setIsHovering(false)
+    // If user was interacting via click, reset the timer
+    if (isUserInteracting && timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = setTimeout(() => {
+        setIsUserInteracting(false)
+        setClickedService(null)
+      }, 5000)
+    }
+  }
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [])
 
   // Variants para el contenedor
   const containerVariants: Variants = {
@@ -97,13 +155,15 @@ const Services = () => {
             whileInView="visible"
             viewport={{ once: true }}
             className="space-y-6"
+            onMouseEnter={handleServicesMouseEnter}
+            onMouseLeave={handleServicesMouseLeave}
           >
             {services.map((service, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                onMouseEnter={() => setActiveService(index)}
-                onClick={() => setActiveService(index)}
+                onMouseEnter={() => handleServiceHover(index)}
+                onClick={() => handleServiceClick(index)}
                 className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 cursor-pointer transition-all duration-300 ${
                   activeService === index ? "bg-white/15 border-white/30" : "hover:bg-white/10"
                 }`}
@@ -126,6 +186,8 @@ const Services = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="relative h-[500px] rounded-lg overflow-hidden"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
           >
             <motion.div
               key={activeService}
@@ -138,7 +200,7 @@ const Services = () => {
                 src={services[activeService].image || "/placeholder.svg"}
                 alt={services[activeService].title}
                 fill
-                className="object-cover"
+                className={`object-cover transition-all duration-500 ${isHovering || isUserInteracting ? "grayscale-0" : "grayscale"}`}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-black/20"></div>
@@ -154,7 +216,7 @@ const Services = () => {
               {services.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setActiveService(index)}
+                  onClick={() => handleServiceClick(index)}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     activeService === index ? "bg-white" : "bg-white/40"
                   }`}

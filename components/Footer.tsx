@@ -2,23 +2,46 @@
 
 import { Instagram } from "lucide-react"
 import Image from "next/image"
+import { motion } from "framer-motion"
+import { useRef } from "react"
+import { useInView } from "framer-motion"
 
 const Footer = () => {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-50px" })
+
   return (
-    <footer className="bg-black border-t border-white/10 py-12">
+    <footer className="bg-black border-t border-white/10 py-12" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center space-x-3 mb-4">
+              {/* Animación SOLO en el logo */}
+             <motion.div
+              initial={{ opacity: 0, x: -80 }}
+              animate={isInView ? { 
+                opacity: 1, 
+                x: [ -80, 0, -10, 0 ] 
+              } : {}}
+              transition={{ 
+                duration: 0.8, // más rápido que el header
+                ease: "easeOut",
+                times: [0, 0.6, 0.8, 1] 
+              }}
+            >
               <Image
-                src="/images/logo-produ-estudio.jpg"
+                src="/images/logo-produ-estudio.png"
                 alt="Produ Estudio Logo"
-                width={32}
-                height={32}
+                width={96}
+                height={96}
                 className="rounded"
               />
+            </motion.div>
+
+              {/* El título queda fijo */}
               <h3 className="text-xl font-bold text-white">PRODU ESTUDIO</h3>
             </div>
+
             <p className="text-gray-400 leading-relaxed">
               Fabricamos prendas para marcas de streetwear y básicos con calidad, compromiso y confianza.
             </p>
@@ -29,12 +52,12 @@ const Footer = () => {
             <h4 className="text-lg font-semibold text-white mb-4">Enlaces</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <a href="/terms-of-use" className="text-gray-400 hover:text-white transition-colors duration-200">
                   Términos y condiciones
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors duration-200">
                   Política de privacidad
                 </a>
               </li>
@@ -69,8 +92,27 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-8 pt-8 text-center">
-          <p className="text-gray-400">© 2025 Produ Estudio – Todos los derechos reservados.</p>
+        <div className="border-t border-white/10 mt-8 pt-8">
+          <div className="text-center space-y-2">
+            <p className="text-gray-400">© 2025 Produ Estudio – Todos los derechos reservados.</p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="text-xs text-gray-500 font-serif italic"
+            >
+              Sitio desarrollado con{" "}
+              <span className="text-red-400 text-sm animate-heartbeat">♥</span> por{" "}
+              <a
+                href="https://ian9franco.github.io/Portfolio/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-gray-300 transition-colors duration-200 underline decoration-dotted underline-offset-2"
+              >
+                Ian Pontorno
+              </a>
+            </motion.p>
+          </div>
         </div>
       </div>
     </footer>
