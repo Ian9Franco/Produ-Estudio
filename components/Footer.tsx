@@ -104,7 +104,7 @@ const Footer = () => {
               Sitio desarrollado con{" "}
               <span className="text-red-400 text-sm animate-heartbeat">♥</span> por{" "}
               <a
-                href="https://ian9franco.github.io/Portfolio/"
+                href="https://ian-pontorno-portfolio.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-gray-300 transition-colors duration-200 underline decoration-dotted underline-offset-2"
