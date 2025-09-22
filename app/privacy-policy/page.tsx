@@ -204,7 +204,7 @@ export default function PrivacyPolicyPage() {
               <p className="text-gray-400 text-sm">
                 Este sitio web es mantenido y actualizado por el desarrollador web responsable de su implementación {" "}
                 <a
-                  href="https://ian9franco.github.io/Portfolio/"
+                  href="https://ian-pontorno-portfolio.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white font-medium hover:text-gray-300 transition-colors duration-200"
