@@ -7,21 +7,26 @@ import Testimonials from "@/components/Testimonials"
 import Contact from "@/components/Contact"
 import Footer from "@/components/Footer"
 import WhatsAppButton from "@/components/WhatsAppButton"
+import BeamsBackground from "@/components/BeamsBackground"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <Header />
-      <main>
-        <Hero />
-        <Services />
-        <About />
-        <FAQ />
-        <Testimonials />
-        <Contact />
-      </main>
-      <Footer />
-      <WhatsAppButton />
+    <div className="min-h-screen bg-black text-white relative">
+      <BeamsBackground intensity="subtle" className="fixed inset-0 z-0 bg-black" />
+
+      <div className="relative z-10">
+        <Header />
+        <main>
+          <Hero />
+          <Services />
+          <About />
+          <FAQ />
+          <Testimonials />
+          <Contact />
+        </main>
+        <Footer />
+        <WhatsAppButton />
+      </div>
     </div>
   )
 }

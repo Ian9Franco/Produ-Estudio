@@ -32,8 +32,9 @@ const testimonials: Testimonial[] = [
     name: "María",
     nameColor: "#4ECDC4",
     messages: [
-      { text: "Quedé fascinada con la calidad", time: "14:30" },
-      { text: "El acabado es perfecto", time: "14:31", isLast: true },
+      { text: "Un exito los grises", time: "14:30" },
+      { text: "Recien los entregamos", time: "14:30" },
+      { text: "Probablemente quieran mas", time: "14:31", isLast: true },
     ],
   },
   {
@@ -41,18 +42,16 @@ const testimonials: Testimonial[] = [
     name: "Ana",
     nameColor: "#45B7D1",
     messages: [
-      { text: "Súper recomendable!", time: "09:15" },
-      { text: "Entrega rápida y excelente atención", time: "09:16" },
-      { text: "Ya les encargué más prendas", time: "09:17", isLast: true },
+      { text: "Quedaron hermosos maca, gracias", time: "09:15" },
+      { text: "Les encantaron a las chicas", time: "09:17", isLast: true },
     ],
   },
   {
     id: 4,
-    name: "Carla",
+    name: "Miry",
     nameColor: "#96CEB4",
     messages: [
-      { text: "Increíble trabajo", time: "16:45" },
-      { text: "Superó mis expectativas", time: "16:46", isLast: true },
+      { text: "no tuve mala idea y vos la rompiste jajaja q buen equipo", time: "16:46", isLast: true },
     ],
   },
 ]

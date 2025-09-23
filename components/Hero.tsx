@@ -14,7 +14,7 @@ const Hero = () => {
   return (
     <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-5">
         <Image
           src="/textile-workshop-with-sewing-machines-and-fabrics-.jpg"
           alt="Taller textil con máquinas de coser"
@@ -49,15 +49,18 @@ const Hero = () => {
             producir con calidad, compromiso y confianza.
           </motion.p>
 
-          <motion.button
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            onClick={scrollToContact}
-            className="bg-white text-black px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105"
           >
-            Pedí tu presupuesto
-          </motion.button>
+            <button
+              onClick={scrollToContact}
+              className="bg-white text-black px-8 py-4 text-lg rounded-full font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105"
+            >
+              Pedí tu presupuesto
+            </button>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -66,7 +69,7 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
       >
         <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
           <motion.div
