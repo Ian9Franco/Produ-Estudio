@@ -69,7 +69,7 @@ const Footer = () => {
             <h4 className="text-lg font-semibold text-white mb-4">Seguinos</h4>
             <div className="flex space-x-4">
               <a
-                href="https://instagram.com/produ.estudio"
+                href="https://www.instagram.com/produ_estudio/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white/5 border border-white/10 p-3 rounded-lg hover:bg-white/10 transition-all duration-300 group"

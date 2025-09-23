@@ -226,7 +226,7 @@ export default function TermsOfUsePage() {
               </div>
               <div className="bg-black/50 rounded-lg p-4 border border-gray-700">
                 <p className="text-white font-medium text-sm">Instagram</p>
-                <p className="text-gray-300 text-sm">@produ.estudio</p>
+                <p className="text-gray-300 text-sm">@produ_estudio</p>
               </div>
               <div className="bg-black/50 rounded-lg p-4 border border-gray-700">
                 <p className="text-white font-medium text-sm">Email</p>

@@ -266,7 +266,7 @@ const Contact = () => {
                 </a>
 
                 <a
-                  href="https://instagram.com/produ.estudio"
+                  href="https://www.instagram.com/produ_estudio/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-4 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 group"
@@ -274,7 +274,7 @@ const Contact = () => {
                   <Instagram className="h-6 w-6 text-pink-400 group-hover:scale-110 transition-transform duration-200" />
                   <div>
                     <p className="text-white font-medium">Instagram</p>
-                    <p className="text-gray-400">@produ.estudio</p>
+                    <p className="text-gray-400">@produ_estudio</p>
                   </div>
                 </a>
               </div>
