@@ -22,7 +22,7 @@ const testimonials: Testimonial[] = [
     name: "Sofía",
     nameColor: "#FF6B6B", // Assigned unique color for each user
     messages: [
-      { text: "Hola Macaaaa, siii todo HERMOSO", time: "11:12" },
+      { text: "Hola Macaaaa, siii todo HERMOSO❤️", time: "11:12" },
       { text: "llegamos a casa el sábado y ya nos compraron uno", time: "11:12" },
       { text: "sos una genia nos encantó", time: "11:13", isLast: true },
     ],
@@ -48,10 +48,21 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 4,
-    name: "Miry",
+    name: "Carla",
     nameColor: "#96CEB4",
     messages: [
       { text: "no tuve mala idea y vos la rompiste jajaja q buen equipo", time: "16:46", isLast: true },
+    ],
+  },
+  {
+    id: 5,
+    name: "Candela",
+    nameColor: "#96CEB4",
+    messages: [
+      { text: "Macaaa HERMOSO todo!!!", time: "21:46", },
+      { text: "A la gente le encantó la calidad de los buzos 🥹❤️ ", time: "21:46", },
+      { text: "Cuando se nos esté agotando el stock te hacemos el próximo pedido", time: "21:47",},
+      { text: "Sos una genia, estamos super felices", time: "21:47", isLast: true },
     ],
   },
 ]
@@ -65,7 +76,7 @@ function TypingMessage({ message, onComplete }: { message: string; onComplete: (
       const timeout = setTimeout(() => {
         setDisplayedText((prev) => prev + message[currentIndex])
         setCurrentIndex((prev) => prev + 1)
-      }, 50) // Typing speed
+      }, 15) // Typing speed
       return () => clearTimeout(timeout)
     } else {
       // Typing completed, wait a bit then call onComplete
