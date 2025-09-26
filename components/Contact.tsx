@@ -35,7 +35,7 @@ const Contact = () => {
       )
 
       const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=produ.estudioml@gmail.com&su=${emailSubject}&body=${emailBody}`
-      window.open(gmailUrl, "_blank")
+      window.open(gmailUrl, "_blank") 
 
       
       // Limpiar formulario y mostrar éxito

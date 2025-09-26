@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
@@ -19,23 +18,23 @@ const Header = () => {
   ]
 
   const handleNavigation = (href: string) => {
+    setIsMenuOpen(false)
+
     if (href.startsWith("#")) {
       if (window.location.pathname !== "/") {
         router.push("/")
+        // Esperamos un poco antes de buscar el elemento
         setTimeout(() => {
           const element = document.querySelector(href)
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" })
-          }
-        }, 100)
+          if (element) element.scrollIntoView({ behavior: "smooth" })
+        }, 300)
       } else {
         const element = document.querySelector(href)
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" })
-        }
+        if (element) element.scrollIntoView({ behavior: "smooth" })
       }
+    } else {
+      router.push(href)
     }
-    setIsMenuOpen(false)
   }
 
   const handleLogoClick = () => {
@@ -50,26 +49,13 @@ const Header = () => {
             onClick={handleLogoClick}
             className="flex-shrink-0 flex items-center space-x-3 hover:opacity-80 transition-opacity"
           >
-            {/* LOGO ANIMADO */}
             <motion.div
               initial={{ x: -250, opacity: 0 }}
-              animate={{
-                x: [ -250, 0, -15, 0 ], // entra -> rebota contra el título -> vuelve
-                opacity: 1,
-              }}
-              transition={{
-                duration: 1.4,
-                ease: "easeOut",
-                times: [0, 0.7, 0.85, 1],
-              }}
+              animate={{ x: [-250, 0, -15, 0], opacity: 1 }}
+              transition={{ duration: 1.4, ease: "easeOut", times: [0, 0.7, 0.85, 1] }}
               whileInView={{
                 y: [0, -6, 0],
-                transition: {
-                  delay: 1.6,
-                  repeat: Infinity,
-                  repeatType: "mirror",
-                  duration: 3,
-                },
+                transition: { delay: 1.6, repeat: Infinity, repeatType: "mirror", duration: 3 },
               }}
             >
               <Image
@@ -81,7 +67,6 @@ const Header = () => {
               />
             </motion.div>
 
-            {/* TÍTULO */}
             <motion.h1
               className="text-xl font-bold text-white"
               initial={{ opacity: 0, x: 20 }}
@@ -92,50 +77,53 @@ const Header = () => {
             </motion.h1>
           </button>
 
-          {/* Desktop Navigation */}
+          {/* Desktop */}
           <nav className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {menuItems.map((item) => (
-                <button
+                <a
                   key={item.name}
-                  onClick={() => handleNavigation(item.href)}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleNavigation(item.href)
+                  }}
                   className="text-white hover:text-gray-300 px-3 py-2 text-sm font-medium transition-colors duration-200"
                 >
                   {item.name}
-                </button>
+                </a>
               ))}
             </div>
           </nav>
 
-          {/* Mobile menu button */}
+          {/* Mobile Button */}
           <div className="md:hidden">
             <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="flex flex-col justify-center items-center w-8 h-8 gap-1 relative"
-            aria-label="Toggle menu"
-          >
-            {/* Lineas del burger */}
-            <motion.span
-              className="block w-6 h-0.5 bg-white rounded"
-              animate={isMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            />
-            <motion.span
-              className="block w-6 h-0.5 bg-white rounded"
-              animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
-            />
-            <motion.span
-              className="block w-6 h-0.5 bg-white rounded"
-              animate={isMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            />
-          </button>
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="flex flex-col justify-center items-center w-8 h-8 gap-1 relative"
+              aria-label="Toggle menu"
+            >
+              <motion.span
+                className="block w-6 h-0.5 bg-white rounded"
+                animate={isMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
+              <motion.span
+                className="block w-6 h-0.5 bg-white rounded"
+                animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+              />
+              <motion.span
+                className="block w-6 h-0.5 bg-white rounded"
+                animate={isMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -146,13 +134,17 @@ const Header = () => {
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {menuItems.map((item) => (
-                <button
+                <a
                   key={item.name}
-                  onClick={() => handleNavigation(item.href)}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleNavigation(item.href)
+                  }}
                   className="text-white hover:text-gray-300 block px-3 py-2 text-base font-medium w-full text-left transition-colors duration-200"
                 >
                   {item.name}
-                </button>
+                </a>
               ))}
             </div>
           </motion.div>
