@@ -29,7 +29,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 2,
-    name: "María",
+    name: "Yago",
     nameColor: "#4ECDC4",
     messages: [
       { text: "Un exito los grises", time: "14:30" },
@@ -39,7 +39,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 3,
-    name: "Ana",
+    name: "Hernan",
     nameColor: "#45B7D1",
     messages: [
       { text: "Quedaron hermosos maca, gracias", time: "09:15" },
@@ -48,7 +48,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 4,
-    name: "Carla",
+    name: "Tiago",
     nameColor: "#96CEB4",
     messages: [
       { text: "no tuve mala idea y vos la rompiste jajaja q buen equipo", time: "16:46", isLast: true },
@@ -56,7 +56,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 5,
-    name: "Candela",
+    name: "Andrea",
     nameColor: "#96CEB4",
     messages: [
       { text: "Macaaa HERMOSO todo!!!", time: "21:46", },
