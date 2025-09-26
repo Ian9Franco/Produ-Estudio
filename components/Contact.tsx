@@ -34,9 +34,10 @@ const Contact = () => {
           `Consulta: ${formData.consulta}`
       )
 
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=ian_franco1999@hotmail.com&su=${emailSubject}&body=${emailBody}`
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=produ.estudioml@gmail.com&su=${emailSubject}&body=${emailBody}`
       window.open(gmailUrl, "_blank")
 
+      
       // Limpiar formulario y mostrar éxito
       setSubmitStatus("success")
       setFormData({
